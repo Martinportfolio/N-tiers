@@ -6,6 +6,7 @@ package todo;
 service TodoService {
   rpc AddTask (Task) returns (AddTaskResponse);
   rpc GetTasks (Empty) returns (TaskList);
+  rpc GetWeather (WeatherRequest) returns (WeatherResponse) {}
 }
 
 // Messages utilisés par le service
@@ -23,3 +24,13 @@ message TaskList {
 }
 
 message Empty {}
+
+message WeatherRequest {
+  string city = 1;
+}
+
+message WeatherResponse {
+  float temperature = 1;
+  string description = 2;
+  int32 humidity = 3;
+}
