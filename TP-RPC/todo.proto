@@ -6,7 +6,11 @@ package todo;
 service TodoService {
   rpc AddTask (Task) returns (AddTaskResponse);
   rpc GetTasks (Empty) returns (TaskList);
-  rpc GetWeather (WeatherRequest) returns (WeatherResponse) {}
+  rpc GetWeather (WeatherRequest) returns (WeatherResponse);
+  rpc AddProduct (Product) returns (ProductResponse);
+  rpc GetProducts (Empty) returns (ProductList);
+  rpc UpdateProduct (ProductUpdate) returns (ProductResponse);
+  rpc DeleteProduct (ProductId) returns (ProductResponse);
 }
 
 // Messages utilisés par le service
@@ -33,4 +37,32 @@ message WeatherResponse {
   float temperature = 1;
   string description = 2;
   int32 humidity = 3;
+}
+
+message Product {
+  string name = 1;
+  string description = 2;
+  double price = 3;
+  int32 stock = 4;
+}
+
+message ProductUpdate {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 stock = 5;
+}
+
+message ProductId {
+  string id = 1;
+}
+
+message ProductResponse {
+  string message = 1;
+  optional string id = 2;
+}
+
+message ProductList {
+  repeated Product products = 1;
 }

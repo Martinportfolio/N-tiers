@@ -9,14 +9,14 @@ const todoProto = grpc.loadPackageDefinition(packageDefinition).todo;
 // Création du client
 const client = new todoProto.TodoService('localhost:50051', grpc.credentials.createInsecure());
 
-// Ajouter une tâche
-client.AddTask({ id: '1', description: 'Learn gRPC' }, (err, response) => {
-  if (err) console.error(err);
-  else console.log(response.message);
-
-  // Récupérer les tâches
-  client.GetTasks({}, (err, response) => {
-    if (err) console.error(err);
-    else console.log('Tasks:', response.tasks);
-  });
+// Récupérer la météo pour Béthune
+client.GetWeather({ city: 'Bethune' }, (err, response) => {
+  if (err) {
+    console.error('Erreur:', err);
+  } else {
+    console.log('Météo à Béthune:');
+    console.log(`Température: ${response.temperature}°C`);
+    console.log(`Description: ${response.description}`);
+    console.log(`Humidité: ${response.humidity}%`);
+  }
 });
